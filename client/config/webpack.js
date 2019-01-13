@@ -84,6 +84,9 @@ module.exports = (env) => {
     ],
     devServer: {
       stats: 'errors-only',
+      proxy: {
+        '/sw.js': 'http://localhost:8080/assets/',
+      },
     },
   };
 };
