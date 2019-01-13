@@ -1,9 +1,30 @@
 import { html, render } from 'lit-html';
 import 'material-design-lite';
 
+import { readProjectList } from './api';
+
 import './Application.scss';
 
-const template = () => html`
+const projectTemplate = ({ id, name, taskCount }) => html`
+  <div data-project-id="${id}" class="mdl-card mdl-shadow--2dp full-width">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">${name}</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      ${taskCount} tasks to do.
+    </div>
+    <div class="mdl-card__actions mdl-card--border full-width">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        Edit
+      </a>
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        Delete
+      </a>
+    </div>
+  </div>
+`;
+
+const template = ({ data }) => html`
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
@@ -28,7 +49,9 @@ const template = () => html`
       </nav>
     </div>
     <main class="mdl-layout__content">
-      <div id="content" class="page-content"></div>
+      <div id="content" class="page-content">
+        ${(data.map(projectTemplate))}
+      </div>
     </main>
   </div>
 `;
@@ -36,9 +59,21 @@ const template = () => html`
 export default class Application {
   constructor(rootEl) {
     this.rootEl = rootEl;
+    this.data = [];
+  }
+
+  loadData = async () => {
+    const response = await readProjectList();
+    this.data = response || [];
+    this.render();
+  };
+
+  render() {
+    render(template({ data: this.data }), this.rootEl);
   }
 
   start() {
-    render(template(), this.rootEl);
+    this.loadData();
+    this.render();
   }
 }

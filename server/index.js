@@ -7,6 +7,10 @@ const bodyParser = require('koa-bodyparser');
 const compress = require('koa-compress');
 const serveStatic = require('koa-static');
 
+const Datastore = require('./Datastore');
+
+const db = new Datastore({ filename: path.join(__dirname, '..', 'datastore.json') });
+
 const HTTP_PORT = process.env.PORT || 3000;
 
 const app = new Koa();
@@ -18,6 +22,17 @@ app.use(compress({
 app.use(bodyParser());
 
 const router = new Router();
+
+router.get('/projects', async (ctx) => {
+  const result = await db.getProjects();
+  ctx.response.body = result;
+});
+
+router.post('/projects', async (ctx) => {
+  const attrs = ctx.request.body;
+  const result = await db.createProject(attrs);
+  ctx.response.body = result;
+});
 
 const swSource = fs.readFileSync(path.join(__dirname, '..', 'dist', 'assets', 'sw.js'));
 router.get('/sw.js', async (ctx) => {
