@@ -1,0 +1,42 @@
+{
+  "icons": [
+    {
+      "src": "/assets/icon_512x512.4b17d123ff0e6c9472fee233bf58df95.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon_384x384.398e2c052ba7c059845cc10e545bc835.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon_256x256.4e52e8fa5528686f3617ca3f0a9077be.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon_192x192.714a1246445a6a0da1e3aadf1451234a.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon_128x128.9087e70f70b252f42989f2d8736bba09.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon_96x96.89e0603673c5536be053cfe3238fb7bf.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "PWA Todoist",
+  "short_name": "PWA Todoist",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "/",
+  "description": "PWA application for WarsawJS Workshop #28",
+  "background_color": "#3f51b5",
+  "theme_color": "#3f51b5"
+}
